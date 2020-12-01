@@ -22,7 +22,7 @@ class User {
   private String city;
   @NotBlank
   private String country;
-  @NotBlank
+
   private String zip_code;
 
   public User() {
@@ -31,7 +31,7 @@ class User {
   public User(UUID id, @NotBlank String first_name,
       @NotBlank String last_name, @NotBlank String email,
       @NotBlank String street, @NotBlank String city,
-      @NotBlank String country, @NotBlank String zip_code) {
+      @NotBlank String country, String zip_code) {
     this.id = id;
     this.first_name = first_name;
     this.last_name = last_name;
@@ -43,14 +43,15 @@ class User {
   }
 
   public User(String[] cols) {
-    this.id = UUID.fromString(cols[0]);
-    this.first_name = cols[1];
-    this.last_name = cols[2];
-    this.email = cols[3];
-    this.street = cols[4];
-    this.city = cols[5];
-    this.country = cols[6];
-    this.zip_code = cols[7];
+    int size = cols.length;
+    if(size > 0) this.id = UUID.fromString(cols[0]);
+    if(size > 1) this.first_name = cols[1];
+    if(size > 2) this.last_name = cols[2];
+    if(size > 3) this.email = cols[3];
+    if(size > 4) this.street = cols[4];
+    if(size > 5) this.city = cols[5];
+    if(size > 6) this.country = cols[6];
+    if(size > 7) this.zip_code = cols[7];
   }
 
   public UUID getId() {

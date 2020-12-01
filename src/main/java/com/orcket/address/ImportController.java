@@ -27,8 +27,8 @@ public class ImportController {
     try (BufferedReader br = new BufferedReader(new InputStreamReader(file.getInputStream()))) {
       br.lines()
           .skip(1)
+          .filter(rawString -> !rawString.isBlank())
           .map(rawString -> rawString.split(","))
-          .filter(cols -> cols.length == 8)
           .map(User::new)
           .forEach(repository::save);
     }
